@@ -1,0 +1,21 @@
+﻿@model Property.DomainContracts.Dtos.ContactDetails
+
+<fieldset>
+    <legend>ContactDetails</legend>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Type)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Type)
+        @Html.ValidationMessageFor(model => model.Type)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Details)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Details)
+        @Html.ValidationMessageFor(model => model.Details)
+    </div>
+</fieldset>

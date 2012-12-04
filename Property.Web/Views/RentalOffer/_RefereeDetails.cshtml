@@ -1,0 +1,37 @@
+﻿@model Property.DomainContracts.Dtos.RefereeDetails
+
+<fieldset>
+    <legend>Referee Details</legend>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.RefereeName)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.RefereeName)
+        @Html.ValidationMessageFor(model => model.RefereeName)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.RefereeContactDetails)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.RefereeContactDetails)
+        @Html.ValidationMessageFor(model => model.RefereeContactDetails)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.NameOfEmployer)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.NameOfEmployer)
+        @Html.ValidationMessageFor(model => model.NameOfEmployer)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Relationship)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Relationship)
+        @Html.ValidationMessageFor(model => model.Relationship)
+    </div>
+</fieldset>

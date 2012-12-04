@@ -1,0 +1,8 @@
+﻿@model Property.DomainContracts.Dtos.RetireeDetails
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AnnualPensionIncome)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.AnnualPensionIncome)
+        @Html.ValidationMessageFor(model => model.AnnualPensionIncome)
+    </div>

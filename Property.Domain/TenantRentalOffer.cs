@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Property.Domain
 {
-    class TenantRentalOffer
+    /*
+     * i dont think this is a domain object and it has been moved to DTOs - pending delete, post commit
+     */
+
+    public class TenantRentalOffer
     {
         public Term Term { get; set; }
         public DateTime BreakDate { get; set; }
@@ -23,7 +23,7 @@ namespace Property.Domain
         //public User SubmittedBy{ get; set; }
     }
 
-    internal class TenantDetail
+    public class TenantDetail
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -51,7 +51,7 @@ namespace Property.Domain
     {
         public Money AnnualPensionIncome { get; set; }
     }
-}
+
 
     public class StudentDetails
     {

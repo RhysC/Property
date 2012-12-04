@@ -1,0 +1,32 @@
+﻿@model Property.DomainContracts.Dtos.SelfEmployedDetails
+<div class="editor-label">
+    @Html.LabelFor(model => model.PreviousYearsRevenue)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PreviousYearsRevenue)
+    @Html.ValidationMessageFor(model => model.PreviousYearsRevenue)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.PreviousYearsSalaryAndDiviendPaidToSelf)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.PreviousYearsSalaryAndDiviendPaidToSelf)
+    @Html.ValidationMessageFor(model => model.PreviousYearsSalaryAndDiviendPaidToSelf)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.CompanyName)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CompanyName)
+    @Html.ValidationMessageFor(model => model.CompanyName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TimeHaveBeenSelfEmployed)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.TimeHaveBeenSelfEmployed)
+    @Html.ValidationMessageFor(model => model.TimeHaveBeenSelfEmployed)
+</div>

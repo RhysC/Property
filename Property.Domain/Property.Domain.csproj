@@ -40,8 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactType.cs" />
+    <Compile Include="Property.cs" />
+    <Compile Include="Repositories\IRentalOfferRepository.cs" />
+    <Compile Include="Repositories\IUserNotificationRepsoitory.cs" />
+    <Compile Include="TenantRentalOffer.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Property.DomainContracts\Property.DomainContracts.csproj">
+      <Project>{c51baced-80f9-4131-8aea-2f1d955ac3b9}</Project>
+      <Name>Property.DomainContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

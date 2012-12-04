@@ -1,0 +1,136 @@
+﻿@using Property.Web.Views
+@model Property.DomainContracts.Dtos.TenantDetail
+
+<fieldset>
+    <legend>Tenant Detail</legend>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+    </div>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+    </div>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DateOfBirth)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DateOfBirth)
+            @Html.ValidationMessageFor(model => model.DateOfBirth)
+        </div>
+    </div>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PlaceOfBirth)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.PlaceOfBirth)
+            @Html.ValidationMessageFor(model => model.PlaceOfBirth)
+        </div>
+    </div>
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NationalInsuranceNumber)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NationalInsuranceNumber)
+            @Html.ValidationMessageFor(model => model.NationalInsuranceNumber)
+        </div>
+    </div>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IsSmoker)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IsSmoker)
+            @Html.ValidationMessageFor(model => model.IsSmoker)
+        </div>
+    </div>
+    <div class="inputFit2">
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HasPets)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HasPets)
+            @Html.ValidationMessageFor(model => model.HasPets)
+        </div>
+    </div>
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HasBeenEvictedFromAPreviousProperty)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HasBeenEvictedFromAPreviousProperty)
+            @Html.ValidationMessageFor(model => model.HasBeenEvictedFromAPreviousProperty)
+        </div>
+    </div>
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.HasCriminalConvictions)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.HasCriminalConvictions)
+            @Html.ValidationMessageFor(model => model.HasCriminalConvictions)
+        </div>
+    </div>
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RequiresHousingSupportToPayRent)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RequiresHousingSupportToPayRent)
+            @Html.ValidationMessageFor(model => model.RequiresHousingSupportToPayRent)
+        </div>
+    </div>
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdditionalDetails)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdditionalDetails)
+            @Html.ValidationMessageFor(model => model.AdditionalDetails)
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Employment Details</legend>
+    <!-- see http://stackoverflow.com/questions/10793803/how-to-specify-the-name-property-using-knockout-js for collection mapping in Knockout and mvc form collections -->
+    <div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EmploymentStatus)
+        </div>
+        <div class="editor-field">
+            @Html.EnumDropDownListFor(model => model.EmploymentStatus)
+            @Html.ValidationMessageFor(model => model.EmploymentStatus)
+        </div>
+    </div>
+    <div id="EmploymentDetailsContainer" class="hide">
+        @Html.Partial("_EmploymentDetails")
+    </div>
+    <div id="SelfEmployedDetailsContainer" class="hide">
+        @Html.Partial("_SelfEmployedDetails")
+    </div>
+    <div id="RetireeDetailsContainer" class="hide">
+        @Html.Partial("_RetireeDetails")
+    </div>
+   <div id="GuarantorContainer" class="hide">
+        @Html.Partial("_Guarantor")
+    </div>
+     <div id="ContactDetailsContainer" class="hide">
+        @Html.Partial("_ContactDetails",)
+    </div>
+     <div id="RefereeDetailsContainer" class="hide">
+        @Html.Partial("_RefereeDetails")
+    </div>
+</fieldset>

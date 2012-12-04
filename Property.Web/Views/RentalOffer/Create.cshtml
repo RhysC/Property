@@ -1,0 +1,110 @@
+﻿@using Property.DomainContracts.Dtos
+@using Property.Web.Views
+@model Property.DomainContracts.Dtos.TenantRentalOffer
+
+@{
+    ViewBag.Title = "Tenant Rental Offer";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Rental Period</legend>
+        <!-- dates -->
+        <div class="inputFit3">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProposedStartDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ProposedStartDate)
+                @Html.ValidationMessageFor(model => model.ProposedStartDate)
+            </div>
+        </div>
+        <div class="inputFit3">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.IntendedTermEndDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.IntendedTermEndDate)
+                @Html.ValidationMessageFor(model => model.IntendedTermEndDate)
+            </div>
+        </div>
+        <div class="inputFit3">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.BreakDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.BreakDate)
+                @Html.ValidationMessageFor(model => model.BreakDate)
+            </div>
+        </div>
+    </fieldset>
+    <fieldset>
+        <legend>Payment Details</legend>
+        <!-- Payments -->
+        <div class="inputFit2">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Deposit)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Deposit)
+                @Html.ValidationMessageFor(model => model.Deposit)
+            </div>
+        </div>
+        <div class="inputFit2">
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProposedRent)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ProposedRent)
+                @Html.ValidationMessageFor(model => model.ProposedRent)
+            </div>
+        </div>
+        <div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProposedPaymentFrequency)
+            </div>
+            <div class="editor-field">
+                @Html.EnumDropDownListFor(model => model.ProposedPaymentFrequency)
+                @Html.ValidationMessageFor(model => model.ProposedPaymentFrequency)
+            </div>
+        </div>
+    </fieldset>
+    
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AdditonalRequirements)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.AdditonalRequirements)
+        @Html.ValidationMessageFor(model => model.AdditonalRequirements)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.NumberOfTenants)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.NumberOfTenants)
+        @Html.ValidationMessageFor(model => model.NumberOfTenants)
+    </div>
+    
+    
+   <!-- @Html.Partial("_TenantDetail", TenantDetail.CreateDefault()) -->
+
+   <p>
+        <input type="submit" value="Next" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/tenant")
+}

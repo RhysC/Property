@@ -1,0 +1,24 @@
+﻿@model Property.DomainContracts.Dtos.EmploymentDetails
+<div class="editor-label">
+    @Html.LabelFor(model => model.NameOfEmployer)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.NameOfEmployer)
+    @Html.ValidationMessageFor(model => model.NameOfEmployer)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Position)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Position)
+    @Html.ValidationMessageFor(model => model.Position)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.TimeWithCurrentEmployer)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.TimeWithCurrentEmployer)
+    @Html.ValidationMessageFor(model => model.TimeWithCurrentEmployer)
+</div>

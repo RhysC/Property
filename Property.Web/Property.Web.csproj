@@ -163,12 +163,23 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RentalOfferController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201212041304548_InitialUserCreation.cs" />
+    <Compile Include="Migrations\201212041304548_InitialUserCreation.Designer.cs">
+      <DependentUpon>201212041304548_InitialUserCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CustomModelMetadataProvider.cs" />
+    <Compile Include="Models\StringExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IAudit.cs" />
+    <Compile Include="Services\IQueueWriter.cs" />
+    <Compile Include="Views\HtmlExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -227,10 +238,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <None Include="Scripts\jquery-1.7.2.intellisense.js" />
+    <Content Include="Scripts\backbone.js" />
+    <Content Include="Scripts\backbone.min.js" />
+    <Content Include="Scripts\jquery-1.7.2.js" />
+    <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -242,6 +255,8 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -281,12 +296,32 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
+    <Content Include="Views\RentalOffer\Create.cshtml" />
+    <Content Include="Views\Default1\Index.cshtml" />
+    <Content Include="Views\Default1\Details.cshtml" />
+    <Content Include="Views\Default1\Create.cshtml" />
+    <Content Include="Views\Default1\Edit.cshtml" />
+    <Content Include="Views\Default1\Delete.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\RentalOffer\_TenantDetail.cshtml" />
+    <Content Include="Views\RentalOffer\_EmploymentDetails.cshtml" />
+    <Content Include="Views\RentalOffer\_SelfEmployedDetails.cshtml" />
+    <Content Include="Views\RentalOffer\_RefereeDetails.cshtml" />
+    <Content Include="Views\RentalOffer\_ContactDetails.cshtml" />
+    <Content Include="Views\RentalOffer\_Guarantor.cshtml" />
+    <Content Include="Views\RentalOffer\_RetireeDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Property.DomainContracts\Property.DomainContracts.csproj">
+      <Project>{C51BACED-80F9-4131-8AEA-2F1D955AC3B9}</Project>
+      <Name>Property.DomainContracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -304,7 +339,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>49644</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:62843/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
@@ -320,6 +355,38 @@
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
+  -->
+  <ItemGroup>
+    <JavascriptFiles Include="Scripts\backbone.js" />
+    <JavascriptFiles Include="Scripts\backbone.min.js" />
+    <JavascriptFiles Include="Scripts\jquery-1.7.2.intellisense.js" />
+    <JavascriptFiles Include="Scripts\jquery-1.7.2.js" />
+    <JavascriptFiles Include="Scripts\jquery-1.7.2.min.js" />
+    <JavascriptFiles Include="Scripts\jquery-ui-1.8.20.js" />
+    <JavascriptFiles Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <JavascriptFiles Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <JavascriptFiles Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <JavascriptFiles Include="Scripts\jquery.validate-vsdoc.js" />
+    <JavascriptFiles Include="Scripts\jquery.validate.js" />
+    <JavascriptFiles Include="Scripts\jquery.validate.min.js" />
+    <JavascriptFiles Include="Scripts\jquery.validate.unobtrusive.js" />
+    <JavascriptFiles Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <JavascriptFiles Include="Scripts\knockout-2.1.0.debug.js" />
+    <JavascriptFiles Include="Scripts\knockout-2.1.0.js" />
+    <JavascriptFiles Include="Scripts\modernizr-2.5.3.js" />
+    <JavascriptFiles Include="Scripts\Player.js" />
+    <JavascriptFiles Include="Scripts\Song.js" />
+    <JavascriptFiles Include="Scripts\TenantRentalOffer.js" />
+    <JavascriptFiles Include="Scripts\underscore.js" />
+    <JavascriptFiles Include="Scripts\underscore.min.js" />
+    <JavascriptFiles Include="Scripts\_references.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201212041304548_InitialUserCreation.resx">
+      <DependentUpon>201212041304548_InitialUserCreation.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Target Name="AfterBuild">
-  </Target> -->
+    <Copy SourceFiles="@(JavascriptFiles)" DestinationFolder="..\Property.Web.JS.Tests\jasmine-standalone-1.3.0\src\" />
+  </Target>
 </Project>

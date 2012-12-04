@@ -8,23 +8,13 @@ namespace Property.Domain.Specs
     {
         User _user;
         Guid _propertyId = Guid.NewGuid();
-        [Given]
-        public void Given_My_user_account_does_not_have_a_valid_phone_number()
-        {
-            _user = ObjectMother.NewUser().WithNoContactDetails().Create();
-        }
+        
 
         [When]
         public void When_I_make_an_offer()
         {
             var offer = ObjectMother.NewRentalOffer().Create();
             rentalOfferService.PlaceOffer(_user, _propertyId, offer);
-        }
-
-        [Then]
-        public void Then_an_validation_error_will_be_raised_with_ERROR(string error)
-        {
-            ScenarioContext.Current.Pending();
         }
     }
     public class ObjectMother

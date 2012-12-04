@@ -1,0 +1,22 @@
+﻿@using Property.Web.Views
+@model System.DateTime?
+@* <div class="editor-label">
+    @Html.Label("")
+</div>*@
+<div class="editor-field">
+    @Html.TextBox("", String.Format("{0:dd/MM/yy}",(Model == DateTime.MinValue)? null : Model), new { @class="text"})
+</div>
+
+@Html.Script(
+    //@<script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+    @<script type="text/javascript">
+        $(document).ready(function () {
+        $("#@ViewData.ModelMetadata.PropertyName").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: 'dd/MM/yy',
+            gotoCurrent: true
+        });
+    });
+</script>
+)

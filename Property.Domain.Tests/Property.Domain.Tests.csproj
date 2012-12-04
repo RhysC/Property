@@ -46,13 +46,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UserFixture.cs" />
-    <Compile Include="OfferServiceFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Property.DomainContracts\Property.DomainContracts.csproj">
+      <Project>{C51BACED-80F9-4131-8AEA-2F1D955AC3B9}</Project>
+      <Name>Property.DomainContracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Property.Domain\Property.Domain.csproj">
       <Project>{a75f801e-fc55-437e-a50e-9f9a240e5767}</Project>
       <Name>Property.Domain</Name>

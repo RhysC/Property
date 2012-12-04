@@ -1,0 +1,15 @@
+﻿@model Property.DomainContracts.Dtos.Guarantor
+
+<fieldset>
+    <legend>Guarantor</legend>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+    <!-- load employment details template for guarantor -->
+    <!-- load contact details template for guarantor -->
+</fieldset>

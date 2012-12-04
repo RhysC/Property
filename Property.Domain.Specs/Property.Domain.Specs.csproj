@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -52,7 +55,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RentalOffer.feature</DependentUpon>
     </Compile>
-    <Compile Include="RentalOffersFromInvalidUsersSteps.cs" />
+    <Compile Include="TenantRentalOfferSubmissionSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -61,6 +64,16 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>RentalOffer.feature.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Property.DomainContracts\Property.DomainContracts.csproj">
+      <Project>{c51baced-80f9-4131-8aea-2f1d955ac3b9}</Project>
+      <Name>Property.DomainContracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Property.Domain\Property.Domain.csproj">
+      <Project>{a75f801e-fc55-437e-a50e-9f9a240e5767}</Project>
+      <Name>Property.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

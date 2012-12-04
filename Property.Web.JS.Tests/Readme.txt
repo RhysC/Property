@@ -1,0 +1,1 @@
+﻿Files are copied to src from the web project post build
