@@ -57,11 +57,11 @@ CREATE TABLE [dbo].[webpages_UsersInRoles] (
 
         public override void Down()
         {
-            DropTable("[dbo].[webpages_UsersInRoles]");
-            DropTable("[dbo].[webpages_Membership]");
-            DropTable("[dbo].[webpages_Roles]");
-            DropTable("[dbo].[webpages_OAuthMembership]");
-            DropTable("dbo.UserProfile");
+            DropTable("webpages_UsersInRoles");
+            DropTable("webpages_Membership");
+            DropTable("webpages_Roles");
+            DropTable("webpages_OAuthMembership");
+            DropTable("UserProfile");
         }
     }
 }

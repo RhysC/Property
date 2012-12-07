@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
 using System.Linq;
 using System.Transactions;
 using System.Web;
@@ -10,6 +12,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Property.Web.Filters;
 using Property.Web.Models;
+using IsolationLevel = System.Transactions.IsolationLevel;
 
 namespace Property.Web.Controllers
 {
@@ -17,9 +20,10 @@ namespace Property.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private UsersContext db = new UsersContext();
+
         //
         // GET: /Account/Login
-
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -29,7 +33,6 @@ namespace Property.Web.Controllers
 
         //
         // POST: /Account/Login
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -47,7 +50,6 @@ namespace Property.Web.Controllers
 
         //
         // POST: /Account/LogOff
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
@@ -59,7 +61,6 @@ namespace Property.Web.Controllers
 
         //
         // GET: /Account/Register
-
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -68,7 +69,6 @@ namespace Property.Web.Controllers
 
         //
         // POST: /Account/Register
-
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -95,7 +95,6 @@ namespace Property.Web.Controllers
 
         //
         // POST: /Account/Disassociate
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
@@ -232,6 +231,8 @@ namespace Property.Web.Controllers
             {
                 // If the current user is logged in add the new account
                 OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                var x = OAuthWebSecurity.GetOAuthClientData(result.Provider);
+
                 return RedirectToLocal(returnUrl);
             }
             else
@@ -240,7 +241,8 @@ namespace Property.Web.Controllers
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { OriginalUserName = result.UserName, UserName = result.UserName, ExternalLoginData = loginData });
             }
         }
 
@@ -270,7 +272,21 @@ namespace Property.Web.Controllers
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                       var userProfile = db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+
+                        db.PersonalDetails.Add(new PersonalDetails
+                                {
+                                    Profile = userProfile,
+                                    ContactDetails = new Collection<ContactInformation>
+                                        {
+                                            new ContactInformation
+                                                {
+                                                    ContactType = ContactType.Email,
+                                                    Details = model.OriginalUserName
+                                                }
+                                        }
+                                });
+
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
