@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
 using System.Linq;
 using System.Transactions;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using DotNetOpenAuth.AspNet;
@@ -20,8 +16,6 @@ namespace Property.Web.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
-        private UsersContext db = new UsersContext();
-
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -38,7 +32,9 @@ namespace Property.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
+// ReSharper disable RedundantArgumentName
             if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+// ReSharper restore RedundantArgumentName
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -231,14 +227,12 @@ namespace Property.Web.Controllers
             {
                 // If the current user is logged in add the new account
                 OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
-                var x = OAuthWebSecurity.GetOAuthClientData(result.Provider);
-
                 return RedirectToLocal(returnUrl);
             }
             else
             {
                 // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
+                var loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
 
@@ -254,8 +248,8 @@ namespace Property.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
-            string providerUserId = null;
+            string provider;
+            string providerUserId;
 
             if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
             {
@@ -265,29 +259,22 @@ namespace Property.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                using (var usersContext = new UsersContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    var user = usersContext.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
-                       var userProfile = db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        var userProfile = usersContext.UserProfiles.Add(new UserProfile { UserName = model.UserName, });
 
-                        db.PersonalDetails.Add(new PersonalDetails
+                        usersContext.PersonalDetails.Add(new PersonalDetails
                                 {
                                     Profile = userProfile,
-                                    ContactDetails = new Collection<ContactInformation>
-                                        {
-                                            new ContactInformation
-                                                {
-                                                    ContactType = ContactType.Email,
-                                                    Details = model.OriginalUserName
-                                                }
-                                        }
+                                    Email = model.OriginalUserName
                                 });
 
-                        db.SaveChanges();
+                        usersContext.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
                         OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
@@ -326,35 +313,27 @@ namespace Property.Web.Controllers
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
-            List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
-            {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
+            var accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            var externalLogins = (from account in accounts
+                                  let clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider)
+                                  select new ExternalLogin
+                                      {
+                                          Provider = account.Provider, 
+                                          ProviderDisplayName = clientData.DisplayName, 
+                                          ProviderUserId = account.ProviderUserId,
+                                      }).ToList();
 
-                externalLogins.Add(new ExternalLogin
-                {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
-                    ProviderUserId = account.ProviderUserId,
-                });
-            }
-
-            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || 
+                                       OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return Url.IsLocalUrl(returnUrl) ? 
+                (ActionResult) Redirect(returnUrl) :
+                RedirectToAction("Index", "Home");
         }
 
         public enum ManageMessageId
