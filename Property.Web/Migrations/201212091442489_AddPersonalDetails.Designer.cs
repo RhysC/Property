@@ -11,7 +11,7 @@ namespace Property.Web.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201212071610107_AddPersonalDetails"; }
+            get { return "201212091442489_AddPersonalDetails"; }
         }
         
         string IMigrationMetadata.Source

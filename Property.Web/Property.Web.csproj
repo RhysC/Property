@@ -173,9 +173,9 @@
     <Compile Include="Migrations\201212041304548_InitialUserCreation.Designer.cs">
       <DependentUpon>201212041304548_InitialUserCreation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201212071610107_AddPersonalDetails.cs" />
-    <Compile Include="Migrations\201212071610107_AddPersonalDetails.Designer.cs">
-      <DependentUpon>201212071610107_AddPersonalDetails.cs</DependentUpon>
+    <Compile Include="Migrations\201212091442489_AddPersonalDetails.cs" />
+    <Compile Include="Migrations\201212091442489_AddPersonalDetails.Designer.cs">
+      <DependentUpon>201212091442489_AddPersonalDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -393,8 +393,8 @@
     <EmbeddedResource Include="Migrations\201212041304548_InitialUserCreation.resx">
       <DependentUpon>201212041304548_InitialUserCreation.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201212071610107_AddPersonalDetails.resx">
-      <DependentUpon>201212071610107_AddPersonalDetails.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201212091442489_AddPersonalDetails.resx">
+      <DependentUpon>201212091442489_AddPersonalDetails.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="AfterBuild">

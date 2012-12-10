@@ -11,9 +11,7 @@ namespace Property.Web.Models
         [Required]
         [Display(Name = "User name")]
         public string UserName { get; set; }
-
         public string ExternalLoginData { get; set; }
-
         public string OriginalUserName { get; set; }
     }
 

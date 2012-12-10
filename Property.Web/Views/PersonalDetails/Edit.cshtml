@@ -6,18 +6,27 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>PersonalDetails</legend>
+        <legend>Personal Details</legend>
 
         @Html.HiddenFor(model => model.Id)
-        
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
         @foreach (var cd in Model.ContactDetails)
         {
             @Html.Partial("_ContactInformationEdit", cd);
-            <br/>
+            <br />
         }
 
         <p>

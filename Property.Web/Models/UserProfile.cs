@@ -17,14 +17,21 @@ namespace Property.Web.Models
 
     public class PersonalDetails
     {
+        public PersonalDetails()
+        {
+            ContactDetails = new Collection<ContactInformation>();
+        }
         public int Id { get; set; }
         [Required]
         public virtual UserProfile Profile { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
         public virtual ICollection<ContactInformation> ContactDetails { get; set; }
 
         public static PersonalDetails Default(string email)
         {
-            return new PersonalDetails { ContactDetails = new[] { new ContactInformation { ContactType = ContactType.Email, Details = email } } };
+            return new PersonalDetails { Email = email};
         }
     }
 

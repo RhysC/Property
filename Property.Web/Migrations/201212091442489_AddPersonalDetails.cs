@@ -12,6 +12,7 @@ namespace Property.Web.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false),
+                        Email = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.UserProfile", t => t.Id)
