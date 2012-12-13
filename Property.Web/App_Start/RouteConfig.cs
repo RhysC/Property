@@ -19,6 +19,12 @@ namespace Property.Web
                 //defaults: new { controller = "RentalOffer", action = "Create", id = UrlParameter.Optional }
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "PortfolioCreate",
+                url: "Portfolio/{portfolioId}/Property/Create/",
+                //defaults: new { controller = "RentalOffer", action = "Create", id = UrlParameter.Optional }
+                defaults: new { portfolioId = 0, controller = "PropertyDescription", action = "Create", id = UrlParameter.Optional }
+            );
         }
     }
 }

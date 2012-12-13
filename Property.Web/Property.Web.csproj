@@ -164,6 +164,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PersonalDetailsController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\PropertyDescriptionController.cs" />
     <Compile Include="Controllers\RentalOfferController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -177,9 +179,16 @@
     <Compile Include="Migrations\201212091442489_AddPersonalDetails.Designer.cs">
       <DependentUpon>201212091442489_AddPersonalDetails.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201212101453559_AddPortfolio.cs" />
+    <Compile Include="Migrations\201212101453559_AddPortfolio.Designer.cs">
+      <DependentUpon>201212101453559_AddPortfolio.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\CustomModelMetadataProvider.cs" />
+    <Compile Include="Models\Landlord\Address.cs" />
+    <Compile Include="Models\Landlord\Portfolio.cs" />
+    <Compile Include="Models\Landlord\PropertyDescription.cs" />
     <Compile Include="Models\StringExtensions.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UsersContext.cs" />
@@ -318,6 +327,16 @@
     <Content Include="Views\PersonalDetails\Edit.cshtml" />
     <Content Include="Views\PersonalDetails\Delete.cshtml" />
     <Content Include="Views\PersonalDetails\_ContactInformationEdit.cshtml" />
+    <Content Include="Views\Portfolio\Index.cshtml" />
+    <Content Include="Views\Portfolio\Details.cshtml" />
+    <Content Include="Views\Portfolio\Create.cshtml" />
+    <Content Include="Views\Portfolio\Edit.cshtml" />
+    <Content Include="Views\Portfolio\Delete.cshtml" />
+    <Content Include="Views\PropertyDescription\Details.cshtml" />
+    <Content Include="Views\PropertyDescription\Create.cshtml" />
+    <Content Include="Views\PropertyDescription\Edit.cshtml" />
+    <Content Include="Views\PropertyDescription\Delete.cshtml" />
+    <Content Include="Views\PropertyDescription\_AddressCreate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -395,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201212091442489_AddPersonalDetails.resx">
       <DependentUpon>201212091442489_AddPersonalDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201212101453559_AddPortfolio.resx">
+      <DependentUpon>201212101453559_AddPortfolio.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="AfterBuild">

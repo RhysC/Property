@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Property.Web.Models.Landlord.Portfolio>
+
+@{
+    ViewBag.Title = "Porfolios";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@foreach (var item in Model)
+{
+    <section>
+        <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+
+        @if (item.Properties.Any())
+        {
+            foreach (var property in item.Properties)
+            {
+            <div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
+                <div itemprop="streetAddress">
+                    @Html.DisplayFor(prop => property.Address.StreetAddress)
+                </div>
+                <div itemprop="addressLocality">
+                    @Html.DisplayFor(prop => property.Address.Locality)
+                </div>
+                <div itemprop="addressRegion">
+                    @Html.DisplayFor(prop => property.Address.Region)
+                </div>
+                <div itemprop="postalCode">
+                    @Html.DisplayFor(prop => property.Address.PostCode)
+                </div>
+                <div itemprop="addressCountry">
+                    @Html.DisplayFor(prop => property.Address.Country)
+                </div>
+            </div>
+            }
+        }
+        else
+        {
+            @Html.RouteLink("Add a Property to your Porfolio", "PortfolioCreate", new { portfolioId = item.Id }) 
+            
+            @Html.ActionLink("Add a Property to your Porfolio", "Create", "PropertyDescription", new { portfolioId = item.Id }, null) 
+        }
+        <br/>
+        <div>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+        </div>
+    </section>
+}
